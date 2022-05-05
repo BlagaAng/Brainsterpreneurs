@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Skill;
 use App\Models\Academy;
+use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class RegisterController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,21 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $academies = Academy::get();
-        $skills = Skill::get();
-        return view('auth.register', compact('academies', 'skills'));
+
+
+        $projects = Project::where('user_id', '!=', auth()->user()->id)->paginate(8);
+        $academies = Academy::all();
+
+
+        return view('dashboard', compact('academies', 'projects'));
+    }
+
+    function get_ajax_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $projects = Project::paginate(8);
+            return view('pagination_data', compact('projects', 'academies'))->render();
+        }
     }
 
     /**
@@ -40,25 +52,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        /*  if ($request->password !== $request->passconfirm) {
-            return response()->json(['error' => 'passwords do not match']);
-        }
-        if (empty($request->name) || empty($request->surname) || empty($request->email) || empty($request->password) || empty($request->biography) || empty($request->academy_id) || empty($request->image)) {
-            return response()->json(['error' => 'No field should be empty!']);
-        }
-        $user = new User();
-        $user->name = $request->name;
-        $user->surname = $request->surname;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->biography = $request->biography;
-        $user->academy_id = $request->academy_id;
-        $user->image = $request->image;
-        dd($user);
-
-        if ($user->save()) {
-            return response()->json(['success' => 'User Registered Successfully!']);
-        }; */
+        //
     }
 
     /**

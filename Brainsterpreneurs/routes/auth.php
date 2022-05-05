@@ -17,9 +17,14 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store')
     ->middleware('guest');
 
-Route::put('/register1', [RegisteredUserController::class, 'update'])->name('register.update');
-Route::put('/register2', [RegisteredUserController::class, 'update2'])->name('register.update2');
-Route::put('/register3', [RegisteredUserController::class, 'update3'])->name('register.update3');
+Route::post('/register1', [RegisteredUserController::class, 'update'])->name('register.update')->middleware('guest');
+Route::post('/register2', [RegisteredUserController::class, 'update2'])->name('register.update2')->middleware('guest');
+Route::post('/register3', [RegisteredUserController::class, 'update3'])->name('register.update3')->middleware('guest');
+
+
+Route::get('/{user}/edit',     [RegisteredUserController::class, 'edit'])->name('auth.edit')->middleware(['auth']);
+Route::put('/update/{user}', [RegisteredUserController::class, 'updateForUser'])->name('auth.updateForUser')->middleware(['auth']);
+
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
@@ -27,6 +32,8 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
+
+
 
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
     ->middleware('guest')

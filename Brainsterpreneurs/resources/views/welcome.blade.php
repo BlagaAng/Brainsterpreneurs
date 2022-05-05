@@ -104,7 +104,7 @@
         <input for="email" type="email" placeholder="Email">
         <input for="password" type="text" placeholder="Password">
         <button class="loginBtn">Login</button>
-        <p id="registerLink">Dont't have an account,register <a href="{{ route('registerForm') }}">here</a>!</p>
+        <p id="registerLink">Dont't have an account,register <a href="{{ route('login') }}">here</a>!</p>
 
     </div>
 

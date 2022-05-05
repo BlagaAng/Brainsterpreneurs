@@ -9,9 +9,9 @@ use Illuminate\Foundation\Auth\User;
 class Skill extends Model
 {
     use HasFactory;
-    public function user()
+    public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'skill_user');
     }
 
     protected $fillable = [

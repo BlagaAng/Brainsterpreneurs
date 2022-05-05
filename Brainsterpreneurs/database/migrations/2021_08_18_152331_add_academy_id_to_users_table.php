@@ -14,7 +14,7 @@ class AddAcademyIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->bigInteger('academy_id')->unsigned()->default('1');
+            $table->bigInteger('academy_id')->unsigned()->nullable();
             $table->foreign('academy_id')->references('id')->on('academies')->onDelete('cascade');
         });
     }

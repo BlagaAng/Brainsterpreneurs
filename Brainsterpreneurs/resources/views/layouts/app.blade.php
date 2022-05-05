@@ -10,10 +10,14 @@
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <script src="https://kit.fontawesome.com/2adeb4644b.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 
 
     <!-- Scripts -->

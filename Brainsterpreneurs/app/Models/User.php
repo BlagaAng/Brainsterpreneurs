@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Skill;
 use App\Models\Academy;
+use App\Models\Project;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,9 @@ class User extends Authenticatable
         'password',
         'biography',
         'academy_id',
-        'image'
+        'image',
+        'path',
+        'user_id'
     ];
 
     /**
@@ -49,11 +52,21 @@ class User extends Authenticatable
 
     public function skills()
     {
-        return $this->belongsToMany(Skill::class);
+        return $this->belongsToMany(Skill::class, 'skill_user');
     }
 
     public function academy()
     {
         return $this->belongsTo(Academy::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function applications()
+    {
+        return $this->belongsToMany(Project::class, 'projects_users')->withPivot('user_id', 'approve', 'project_id');
     }
 }

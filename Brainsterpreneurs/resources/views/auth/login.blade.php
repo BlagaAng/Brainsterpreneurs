@@ -109,11 +109,7 @@
                         autocomplete="current-password" />
                 </div>
 
-
-
                 <div class="flex items-center justify-end mt-4">
-
-
                     <x-button class="loginBtn">
                         {{ __('Login') }}
                     </x-button>
